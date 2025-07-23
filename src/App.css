@@ -1,1 +1,58 @@
+    ul#downArrow {
+            position: relative;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            flex-flow: column;
+        }
 
+        ul#downArrow li {
+            list-style: none;
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 100%;
+            margin-bottom: 10px;
+            animation: ani 1.8s infinite ease-in-out;
+            animation-delay: calc(1s * var(--i));
+        }
+
+        ul#downArrow::before,
+        ul#downArrow::after {
+            position: absolute;
+            content: '';
+            background-color: #fff;
+            width: 30px;
+            height: 3px;
+            bottom: 0;
+        }
+
+        ul#downArrow::before {
+            right: 0;
+            transform: rotate(-45deg);
+            transform-origin: center right;
+        }
+
+        ul#downArrow::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: center left;
+        }
+
+        @keyframes ani {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateY(-5px);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1) translateY(20px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5) translateY(40px);
+            }
+            
+        }

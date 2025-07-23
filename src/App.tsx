@@ -1,3 +1,6 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './App.css';
 
 function App() {
@@ -30,6 +33,72 @@ function App() {
     { name: 'aws'},
   ];
 
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const charsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const fullstack = 'FULLSTACK'.split('');
+  const developer = 'DEVELOPER'.split('');
+  const developerRef = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    if (charsRef.current.length) {
+      gsap.fromTo(
+        charsRef.current,
+        { y: 80, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+    if (developerRef.current.length) {
+      gsap.fromTo(
+        developerRef.current,
+        { y: 80, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+          stagger: 0.08,
+          delay: 0.5,
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    const techElements = document.querySelectorAll('.tech-text');
+    techElements.forEach((tech) => {
+      const chars = tech.querySelectorAll('.tech-char');
+      gsap.to(chars, {
+        color: 'white',
+        stagger: {
+          each: 0.1,
+          from: 'end',
+        },
+        scrollTrigger: {
+          trigger: tech,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: true,
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+    });
+  }, []);
+
   return (
     <div className="bg-[#111111] w-screen h-full flex flex-col items-center justify-center scroll-none">
       <nav className='absolute px-[30px] lg:px-[60px] py-[30px] top-0 left-0 text-white'>
@@ -38,19 +107,47 @@ function App() {
         </a>
       </nav>
       <main className='w-full'>
-        <section className='flex items-center  h-screen  relative px-[30px] lg:px-[60px]'>
-          <h1 id='heading' className=' overflow-hidden text-heading font-bold text-[45px] leading-[100%] xl:text-[120px] 2xl:text-[150px] xl:leading-[120px] 2xl:leading-[140px] uppercase mb-16 text-white'>
-            FULLSTACK 
+        <section className='grid grid-cols-2 items-center  h-screen  relative px-[30px] lg:px-[60px]'>
+          <h1 ref={headingRef} id='heading' className=' overflow-hidden text-heading font-bold text-[40px] md:text-[50px] lg:text-[65px] leading-[100%] xl:text-[85px] 2xl:text-[105px] xl:leading-[120px] 2xl:leading-[140px] uppercase mb-16 text-white'>
+            {fullstack.map((char, i) => (
+              <span
+                key={i}
+                ref={el => { charsRef.current[i] = el; }}
+                style={{ display: 'inline-block' }}
+              >
+                {char}
+              </span>
+            ))}
             <br />
-            <span className='ml-10 whitespace-nowrap'>DEVELOPER</span>
+            <span className='ml-10 whitespace-nowrap'>
+              {developer.map((char, i) => (
+                <span
+                  key={i}
+                  ref={el => { developerRef.current[i] = el; }}
+                  style={{ display: 'inline-block' }}
+                >
+                  {char}
+                </span>
+              ))}
+            </span>
           </h1>
+          <div className='flex items-center justify-center'>
+            <img
+              src='selfie.png'
+
+              alt='Selfie'
+              className='object-cover w-1/2 aspect-square rounded-[50%] mb-16'
+            />
+          </div>
+         
+
           <div className='absolute left-0 bottom-[60px] right-0 flex items-end lg:items-start justify-between px-[30px] lg:px-[60px]'>
-            <div className="bottom-10 left-1/2 w-[80px] h-[80px] animate-[spin_6s_linear_infinite]">
-              <img
-                src="/scroll-down.png"
-                alt="Scroll Down"
-                className="w-full h-full object-contain"
-              />
+            <div className="bottom-10 left-1/2 aspect-square h-[80px]   ">
+              <ul id="downArrow">
+                <li ></li>
+                <li ></li>
+                <li ></li>
+            </ul>
             </div>
             <div className='flex flex-col mb-2 lg:mb-0'> 
               <div className='flex items-center gap-4 xl:gap-[20px] 2xl:gap-[30px] down'>
@@ -59,7 +156,7 @@ function App() {
                 </h3>
                 
             </div>
-            <h4 className='font-[200] text-white lg:ml-1 based-in'>
+            <h4 className='font-[200] text-white ml-1 based-in'>
               Based in Poland
             </h4>
           </div>
@@ -68,8 +165,10 @@ function App() {
         <section className="py-[80px] lg:py-[200px] relative grid grid-cols-12 px-[30px] lg:px-[60px]">
           <div className='text col-span-12 lg:col-span-12 flex flex-col gap-14'>
           {techs.map((tech, index) => (
-            <p key={index} className='text-white uppercase font-bold text-right text-[40px] lg:text-[100px] first-p'>
-              {tech.name}
+            <p key={index} className='tech-text uppercase font-bold text-right text-[40px] lg:text-[100px] first-p text-gray-500'>
+              {tech.name.split('').map((char, charIndex) => (
+                <span key={charIndex} className="tech-char" style={{display: 'inline-block'}}>{char === ' ' ? '\u00A0' : char}</span>
+              ))}
             </p>
           ))}
             
@@ -101,7 +200,7 @@ function App() {
             <a className='project-item group flex items-center justify-between'>
               <h3 className='uppercase text-[30px] whitespace-nowrap lg:text-[60px] text-white group-hover:translate-x-5 duration-500 transition'>
                 Time Tone
-              </h3>
+                </h3>
               <img src="/asterisk.svg" alt="arrow" className="project-img-1 scale-50 lg:group-hover:scale-100 h-[100px] lg:h-[150px] opacity-0 transition duration-500 group-hover:opacity-100" />
             </a>
             <hr className="my-7 w-full bg-white h-[1px] text-white opacity-20" />
