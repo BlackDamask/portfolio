@@ -84,3 +84,8 @@ hr.under-link {
 .link-underline:hover .under-link {
   width: 100%;
 }
+
+.project-img-1.show {
+  opacity: 1;
+  transform: scale(1);
+}

@@ -170,6 +170,23 @@ function Layout() {
         }
       );
     }
+
+    // Project item image visibility on click/touch
+    const projectItems = document.querySelectorAll('.project-item');
+    projectItems.forEach(item => {
+      const img = item.querySelector('img');
+      if (!img) return;
+
+      const showImage = () => img.classList.add('show');
+      const hideImage = () => img.classList.remove('show');
+
+      item.addEventListener('mousedown', showImage);
+      item.addEventListener('mouseup', hideImage);
+      item.addEventListener('mouseleave', hideImage);
+      item.addEventListener('touchstart', showImage);
+      item.addEventListener('touchend', hideImage);
+    });
+
   }, []);
 
   return (
