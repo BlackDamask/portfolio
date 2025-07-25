@@ -120,8 +120,11 @@ function Minesweeper() {
         <main className='w-full my-[150px] md:my-[200px] px-[30px] md:px-[60px]'>
           <section className='flex flex-col gap-14 md:gap-6 lg:flex-row min-h-[80vh]'>
             <div ref={infoDivRef} className='lg:w-1/3 lg:fixed flex flex-col gap-[20px]'>
-                <h2 className='text-white project-name leading-[100%] font-medium text-[30px] sm:text-[40px] lg:text-[45px] xl:text-[55px] 2xl:text-[65px] whitespace-nowrap uppercase'>Minesweeper battle</h2>
+                <h2 className='text-white project-name leading-[100%] font-medium text-[30px] sm:text-[40px] lg:text-[45px] xl:text-[55px] 2xl:text-[65px] whitespace-nowrap uppercase'>Slupian Chess Ligue</h2>
                 <div className="flex items-center flex-wrap gap-[6px] group">
+                    <span className='tag-primary rounded-full border border-white text-white uppercase px-3 group-hover:opacity-50 transition hover:!opacity-100'>
+                      In progress
+                    </span>
                     <span className='tag-primary rounded-full border border-white text-white uppercase px-3 group-hover:opacity-50 transition hover:!opacity-100'>
                       Front-end
                     </span>
@@ -131,22 +134,19 @@ function Minesweeper() {
                     <span className='tag-primary rounded-full border border-white text-white uppercase px-3 group-hover:opacity-50 transition hover:!opacity-100'>
                       Websockets
                     </span>
-                    <span className='tag-primary rounded-full border border-white text-white uppercase px-3 group-hover:opacity-50 transition hover:!opacity-100'>
-                      Aws
-                    </span>
                 </div>
                 <p className='text-white project-desc text-opacity-60'>
                     A multiplayer version of the classic Minesweeper game, where players can compete against each other in real-time. The game features a dynamic grid, where players can reveal tiles and flag mines, with the first player to clear their grid winning the game.
                 </p>
-                    <a href="http://minesweeeper.xyz" className='text-white flex flex-col justify-center gap-3 mt-6 md:mt-10 link-underline relative w-fit h-10'>
+                    <a href="https://github.com/sls-web-app" className='text-white flex flex-col justify-center gap-3 mt-6 md:mt-10 link-underline relative w-fit h-10'>
                         <span className='flex'>
-                            Go to website
+                            GitHub Repo
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Arrow / Arrow_Up_Right_LG"><path id="Vector" d="M18.3646 5.63623H11.2939M18.3646 5.63623L18.3643 12.7073M18.3646 5.63623L5.63672 18.3642" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
                         </span>
                         <hr className="under-link w-0 border-white bg-white h-[1px] text-white opacity-20" />
                     </a>
             </div>
-            <img ref={imgRef} src="/minesweeper-full.png" alt="arrow" className='w-full lg:w-1/2 ml-auto' />
+            <img ref={imgRef} src="/sls-full.png" alt="arrow" className='w-full lg:w-1/2 ml-auto' />
           </section>
         </main>
       </div>

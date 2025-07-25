@@ -75,3 +75,12 @@ hr.under-link {
 .get-in-touch {
   transition: background-color 0.7s cubic-bezier(0.4,0,0.2,1), color 0.7s cubic-bezier(0.4,0,0.2,1);
 }
+
+.link-underline .under-link {
+  width: 0;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.link-underline:hover .under-link {
+  width: 100%;
+}

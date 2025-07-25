@@ -188,7 +188,7 @@ function Layout() {
       />
       <div className="bg-[#111111] w-screen h-full flex flex-col items-center justify-center scroll-none">
         <nav className='absolute px-[30px] lg:px-[60px] py-[30px] top-0 left-0 text-white'>
-          <a ref={nameRef} className='text-[12px] sm:text-[15px] md:text-[20px] lg:text-[24px] xl:text-[26px] 2xl:text-[32px] font-[300] text-white text-heading'>
+          <a ref={nameRef} className='text-[20px] lg:text-[24px] xl:text-[26px] 2xl:text-[32px] font-[300] text-white text-heading'>
             {Array.from('Maksym Tiupa').map((char, i) => (
               <span
                 key={i}
@@ -281,25 +281,28 @@ function Layout() {
                 </h2>
               </div>
               <hr className="my-7 w-0 bg-white h-[1px] text-white opacity-20" />
-                <a className='project-item group flex items-center justify-between'>
-                  <h3 className='uppercase text-[30px] whitespace-nowrap lg:text-[60px] text-white group-hover:translate-x-5 duration-500 transition'>
+                <a href="/minesweeper" className='project-item group flex items-center justify-between h-[75px] sm:h-[150px] lg:h-[200px] cursor-pointer'>
+                  <h3 className='uppercase text-[20px] sm:text-[30px] whitespace-nowrap lg:text-[50px] xl:text-[65px] text-white group-hover:translate-x-5 duration-500 transition'>
                     Minesweeper battle
                   </h3>
-                  <img src="/asterisk.svg" alt="arrow" className="project-img-1 scale-50 lg:group-hover:scale-100 h-[100px] lg:h-[150px] opacity-0 transition duration-500 group-hover:opacity-100" />
+                  <img src="/minesweeper.png" alt="arrow" className="project-img-1 scale-50 group-hover:scale-100 h-full opacity-0 transition duration-500 group-hover:opacity-100" />
                 </a>
               <hr className="my-7 w-0 bg-white h-[1px] text-white opacity-20" />
-              <a className='project-item group flex items-center justify-between'>
-                <h3 className='uppercase text-[30px] whitespace-nowrap lg:text-[60px] text-white group-hover:translate-x-5 duration-500 transition'>
+              <a href="/sls" className='project-item group flex items-center justify-between h-[75px] sm:h-[150px] lg:h-[200px]'>
+                <h3 className='uppercase text-[20px] sm:text-[30px] whitespace-nowrap lg:text-[50px] xl:text-[65px] text-white group-hover:translate-x-5 duration-500 transition'>
                   Slupian Chess Ligue
                 </h3>
-                <img src="/asterisk.svg" alt="arrow" className="project-img-1 scale-50 lg:group-hover:scale-100 h-[100px] lg:h-[150px] opacity-0 transition duration-500 group-hover:opacity-100" />              </a>
+                <img src="/sls.png" alt="arrow" className="project-img-1 scale-50 group-hover:scale-100 h-full opacity-0 transition duration-500 group-hover:opacity-100" />            
+              </a>
               <hr className="my-7 w-0 bg-white h-[1px] text-white opacity-20" />
-              <a className='project-item group flex items-center justify-between'>
-                <h3 className='uppercase text-[30px] whitespace-nowrap lg:text-[60px] text-white group-hover:translate-x-5 duration-500 transition'>
+              <a className='project-item group flex items-center justify-between h-[75px] sm:h-[150px] lg:h-[200px]'>
+                <h3 className='uppercase text-[20px] sm:text-[30px] whitespace-nowrap lg:text-[50px] xl:text-[65px] text-white group-hover:translate-x-5 duration-500 transition'>
                   Time Tone
                   </h3>
-                <img src="/asterisk.svg" alt="arrow" className="project-img-1 scale-50 lg:group-hover:scale-100 h-[100px] lg:h-[150px] opacity-0 transition duration-500 group-hover:opacity-100" />              </a>
+                <img src="/minesweeper.png" alt="arrow" className="project-img-1 scale-50 group-hover:scale-100 h-full opacity-0 transition duration-500 group-hover:opacity-100" />   
+              </a>
               <hr className="my-7 w-0 bg-white h-[1px] text-white opacity-20" />
+
             </div>
           </section>
           <section className="px-[30px] lg:px-[60px] lg:mx-10 mb-[100px] lg:mb-[200px] flex flex-col lg:flex-row mt-[50px] lg:mt-[100px]">
