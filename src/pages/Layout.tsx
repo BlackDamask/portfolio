@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -29,6 +30,10 @@ function Layout() {
   const nameRef = useRef<HTMLAnchorElement>(null);
   const nameCharsRef = useRef<(HTMLSpanElement | null)[]>([]);
   const selectedWorksRef = useRef<HTMLDivElement>(null);
+  const selectRef = useRef<HTMLDivElement>(null);
+  const { i18n, t } = useTranslation();
+  console.log('Current language:', i18n.language);
+  console.log('Translation for openToWork:', t('openToWork'));
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -190,12 +195,31 @@ function Layout() {
       item.addEventListener('touchend', hideImage);
     });
 
+    // Animate language select on scroll
+    if (selectRef.current) {
+      gsap.fromTo(
+        selectRef.current,
+        { x: 400, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 3,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: selectRef.current,
+            start: 'top top+=40',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
   }, []);
 
   const handleArrowClick = () => {
     if (selectedWorksRef.current) {
       gsap.to(window, {
-        duration: 5,
+        duration: 4,
         scrollTo: { y: selectedWorksRef.current, offsetY: 0 },
         ease: 'power2.inOut',
       });
@@ -217,9 +241,21 @@ function Layout() {
         }}
       />
       <div className="bg-[#111111] w-screen h-full flex flex-col items-center justify-center scroll-none">
+        {/* Language select dropdown */}
+        <div ref={selectRef} className="absolute top-0 right-0  z-[10] mx-[20px] lg:mx-[40px] my-[20px]">
+          <select
+            value={i18n.language}
+            onChange={e => i18n.changeLanguage(e.target.value)}
+            className="bg-[#111] text-white px-4 py-2 border border-white rounded-none"
+          >
+            <option className='bg-[#111] text-white' value="en">English</option>
+            <option className='bg-[#111] text-white' value="pl">Polski</option>
+            <option className='bg-[#111] text-white' value="ua">Українська</option>
+          </select>
+        </div>
         <nav className='absolute px-[30px] lg:px-[60px] py-[30px] top-0 left-0 text-white'>
           <a ref={nameRef} className='text-[20px] lg:text-[24px] xl:text-[26px] 2xl:text-[32px] font-[300] text-white text-heading'>
-            {Array.from('Maksym Tiupa').map((char, i) => (
+            {Array.from(t('name')).map((char, i) => (
               <span
                 key={i}
                 ref={el => { nameCharsRef.current[i] = el; }}
@@ -278,14 +314,14 @@ function Layout() {
                 <div className='flex flex-col mb-2 lg:mb-0'> 
                   <div className='flex items-center gap-4 xl:gap-[20px] 2xl:gap-[30px] down'>
                     <h3 className='uppercase text-[12px] sm:text-[15px] md:text-[20px] lg:text-[24px] xl:text-[26px] 2xl:text-[32px] font-[400] text-white'>
-                      Open to work
+                      {t('openToWork')}
                     </h3>
                     <img src="/asterisk.svg" alt="asterisk" 
                     className="w-4 sm:w-5 md:w-6 lg:w-7 object-contain animate-[spin_3s_linear_infinite] selected-projects-asterisk" 
                     style={{ opacity: 1 }} />
                   </div>
                   <h4 className='text-[11px] sm:text-[14px] md:text-[18px] lg:text-[23px] xl:text-[25px] 2xl:text-[31px] font-[200] text-white ml-1 based-in'>
-                    Based in Poland
+                    {t('basedIn')}
                   </h4>
                 </div>
               </div>
@@ -307,7 +343,7 @@ function Layout() {
               <div className='flex items-center lg:ml-10 gap-[10px] mt-[100px]'>
                 <img src="/asterisk.svg" alt="asterisk" className="w-4 sm:w-5 md:w-6 lg:w-7 object-contain animate-[spin_3s_linear_infinite] selected-projects-asterisk" style={{ opacity: 1 }} />
                 <h2 className="text-[12px] sm:text-[15px] md:text-[20px] lg:text-[24px] xl:text-[26px] 2xl:text-[32px] uppercase text-white selected-projects font-light  ml-3 whitespace-nowrap">
-                  Selected works
+                  {t('selectedWorks')}
                 </h2>
               </div>
               <hr className="my-7 w-0 bg-white h-[1px] text-white opacity-20" />
@@ -320,7 +356,7 @@ function Layout() {
               <hr className="my-7 w-0 bg-white h-[1px] text-white opacity-20" />
               <a href="/sls" className='project-item group flex items-center justify-between h-[75px] sm:h-[150px] lg:h-[200px]'>
                 <h3 className='uppercase text-[20px] sm:text-[30px] whitespace-nowrap lg:text-[50px] xl:text-[65px] text-white group-hover:translate-x-5 duration-500 transition'>
-                  Slupian Chess Ligue
+                  {t('slupianChessLigue')}
                 </h3>
                 <img src="/sls.png" alt="arrow" className="project-img-1 scale-50 group-hover:scale-100 h-full opacity-0 transition duration-500 group-hover:opacity-100" />            
               </a>
@@ -335,15 +371,15 @@ function Layout() {
 
             </div>
           </section>
-          <section className="px-[30px] lg:px-[60px] lg:mx-10 mb-[100px] lg:mb-[200px] flex flex-col lg:flex-row mt-[50px] lg:mt-[100px]">
+          <section className="px-[30px] lg:px-[30px] lg:mx-10 mb-[100px] lg:mb-[200px] flex flex-col lg:flex-row mt-[50px] lg:mt-[100px]">
             <div className="lg:w-1/2">
               <a href="mailto:tupamaxim6@gmail.com" className='uppercase hover:bg-white hover:text-black transition-colors get-in-touch block text-center text-white text-[30px] w-full lg:!w-fit lg:text-[60px] rounded-full px-9 py-2 border border-white'>
-                Get in touch
+                {t('getInTouch')}
               </a>
             </div>
               <div className='social-links flex flex-col w-full lg:items-end lg:w-1/2 gap-6 mt-16 lg:mt-0'>
                 <a className="link-underline  text-[20px] social-link lg:text-[30px] flex items-center relative w-full justify-between text-white cursor-pointer"  target="_blank" >
-                  Linkedin
+                  {t('linkedin')}
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Arrow / Arrow_Up_Right_LG">
                       <path id="Vector" d="M18.3646 5.63623H11.2939M18.3646 5.63623L18.3643 12.7073M18.3646 5.63623L5.63672 18.3642" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -352,7 +388,7 @@ function Layout() {
                 </a>
                 <hr className="under-link w-0 bg-white h-[2px] text-white opacity-20" />
                 <a className="link-underline gap-4 text-[20px] social-link lg:text-[30px] flex items-center relative w-full justify-between text-white cursor-pointer"  target="_blank" >
-                  GitHub
+                  {t('github')}
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Arrow / Arrow_Up_Right_LG">
                       <path id="Vector" d="M18.3646 5.63623H11.2939M18.3646 5.63623L18.3643 12.7073M18.3646 5.63623L5.63672 18.3642" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
