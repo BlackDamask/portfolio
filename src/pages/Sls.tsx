@@ -136,7 +136,7 @@ function Minesweeper() {
                     </span>
                 </div>
                 <p className='text-white project-desc text-opacity-60'>
-                    A multiplayer version of the classic Minesweeper game, where players can compete against each other in real-time. The game features a dynamic grid, where players can reveal tiles and flag mines, with the first player to clear their grid winning the game.
+                    Slupian Chess Ligue is a web application designed for chess enthusiasts, allowing players to engage in offline matches, track their progress, and participate in tournaments. The platform features real-time game updates, player statistics, and a user-friendly interface for an immersive chess experience.
                 </p>
                     <a href="https://github.com/sls-web-app" className='text-white flex flex-col justify-center gap-3 mt-6 md:mt-10 link-underline relative w-fit h-10'>
                         <span className='flex'>
