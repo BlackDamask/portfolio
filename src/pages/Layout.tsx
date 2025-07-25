@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import '../App.css';
 
 function Layout() {
@@ -30,7 +31,7 @@ function Layout() {
   const selectedWorksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
     if (charsRef.current.length) {
       gsap.fromTo(
         charsRef.current,
@@ -126,8 +127,10 @@ function Layout() {
           duration: 1.2,
           ease: 'power3.inOut',
           onComplete: () => {
-            if (overlayRef.current) overlayRef.current.style.display = 'none';
-          }
+            if (overlayRef.current) {
+              overlayRef.current.style.display = 'none';
+            }
+          },
         }
       );
     }
@@ -188,6 +191,16 @@ function Layout() {
     });
 
   }, []);
+
+  const handleArrowClick = () => {
+    if (selectedWorksRef.current) {
+      gsap.to(window, {
+        duration: 5,
+        scrollTo: { y: selectedWorksRef.current, offsetY: 0 },
+        ease: 'power2.inOut',
+      });
+    }
+  };
 
   return (
     <>
@@ -254,8 +267,8 @@ function Layout() {
               />
             </div>
             <div className='absolute left-0 bottom-[60px] right-0 flex items-end lg:items-start justify-between px-[30px] lg:px-[60px]'>
-              <div className="bottom-10 left-1/2 aspect-square h-[80px]   ">
-                <ul id="downArrow">
+              <div className="bottom-10 left-1/2 aspect-square h-[80px] cursor-pointer ">
+                <ul id="downArrow" onClick={handleArrowClick}>
                   <li ></li>
                   <li ></li>
                   <li ></li>
