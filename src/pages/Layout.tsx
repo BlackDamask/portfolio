@@ -378,7 +378,7 @@ function Layout() {
               </a>
             </div>
               <div className='social-links flex flex-col w-full lg:items-end lg:w-1/2 gap-6 mt-16 lg:mt-0'>
-                <a className="link-underline  text-[20px] social-link lg:text-[30px] flex items-center relative w-full justify-between text-white cursor-pointer"  target="_blank" >
+                <a href='https://www.linkedin.com/in/maksym-tiupa-57212b2b8/' className="link-underline  text-[20px] social-link lg:text-[30px] flex items-center relative w-full justify-between text-white cursor-pointer"  target="_blank" >
                   {t('linkedin')}
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Arrow / Arrow_Up_Right_LG">
@@ -387,7 +387,7 @@ function Layout() {
                   </svg>
                 </a>
                 <hr className="under-link w-0 bg-white h-[2px] text-white opacity-20" />
-                <a className="link-underline gap-4 text-[20px] social-link lg:text-[30px] flex items-center relative w-full justify-between text-white cursor-pointer"  target="_blank" >
+                <a href='https://github.com/BlackDamask' className="link-underline gap-4 text-[20px] social-link lg:text-[30px] flex items-center relative w-full justify-between text-white cursor-pointer"  target="_blank" >
                   {t('github')}
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Arrow / Arrow_Up_Right_LG">
