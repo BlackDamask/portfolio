@@ -327,10 +327,10 @@ function Layout() {
               </div>
             </div>
           </section>
-          <section className="py-[80px] lg:py-[200px] relative grid grid-cols-12 px-[30px] lg:px-[60px]">
+          <section className="py-[80px] relative grid grid-cols-12 px-[30px] lg:px-[60px]">
             <div className='text col-span-12 lg:col-span-12 flex flex-col gap-14'>
               {techs.map((tech, index) => (
-                <p key={index} className='tech-text uppercase font-bold text-right text-[40px] lg:text-[100px] first-p text-zinc-500'>
+                <p key={index} className='tech-text uppercase font-bold text-right text-[40px] lg:text-[80px] first-p text-zinc-500'>
                   {tech.name.split('').map((char, charIndex) => (
                     <span key={charIndex} className="tech-char" style={{display: 'inline-block'}}>{char === ' ' ? '\u00A0' : char}</span>
                   ))}
